@@ -12,5 +12,11 @@ pipeline {
                 sh 'cp ${WORK_DIR}/${JOB_NAME}/env/* ${WORK_DIR}/${JOB_NAME}/hadoop-3.3.3/etc/hadoop/'
             }
         }
+        stage('run hadoop') {
+            steps {
+                sh '${WORK_DIR}/${JOB_NAME}/hadoop-3.3.3/bin/hadoop namenode -format'
+                sh '${WORK_DIR}/${JOB_NAME}/hadoop-3.3.3/sbin/start-dfs.sh'
+            }
+        }
     }
 }
