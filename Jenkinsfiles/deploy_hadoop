@@ -14,6 +14,7 @@ pipeline {
         }
         stage('run hadoop') {
             steps {
+                sh 'export PDSH_RCMD_TYPE=ssh'
                 sh '${WORK_DIR}/${JOB_NAME}/hadoop-3.3.3/sbin/start-dfs.sh'
             }
         }
