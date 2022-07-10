@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('git pull') {
+            steps {
+                script {
+                    try {
+                    	sh 'cd ./hadoop && git checkout release-3.3.3-RC1'
+                    } catch(err) {
+                    	sh 'git clone https://github.com/apache/hadoop.git'
+                    	sh 'cd ./hadoop && git checkout release-3.3.3-RC1'
+                    }
+                }
+            }
+        }
+        stage('maven package hadoop') {
+            steps {
+            	dir('./hadoop') {
+            	    sh 'mvn package -Pdist -DskipTests -Dtar -Dmaven.javadoc.skip=true'
+            	    sh 'cp -f ./hadoop-3.3.3.tar.gz /var/lib/jenkins/workspace/'
+            	}
+            }
+        }
+    }
+}
