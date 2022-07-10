@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+
+    environment {
+            WORK_DIR = '/var/lib/jenkins/workspace'
+        }
+
+    stages {
+        stage('copy distr') {
+            steps {
+                sh 'tar ${WORK_DIR}/hadoop-3.3.3.tar.gz --directory ${WORK_DIR}/${JOB_NAME}/'
+                sh 'cp ${WORK_DIR}/${JOB_NAME}/env/* ${WORK_DIR}/${JOB_NAME}/hadoop-3.3.3/etc/hadoop/'
+            }
+        }
+    }
+}
