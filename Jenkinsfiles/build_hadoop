@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        WORK_DIR = '/var/lib/jenkins/workspace'
+    }
+
     stages {
         stage('git pull') {
             steps {
@@ -18,7 +22,7 @@ pipeline {
             steps {
             	dir('./hadoop') {
             	    sh 'mvn package -Pdist -DskipTests -Dtar -Dmaven.javadoc.skip=true'
-            	    sh 'cp -f ./hadoop-3.3.3.tar.gz /var/lib/jenkins/workspace/'
+            	    sh 'cp -f ${WORK_DIR}/${JOB_NAME}/hadoop/hadoop-3.3.3.tar.gz /var/lib/jenkins/workspace/'
             	}
             }
         }

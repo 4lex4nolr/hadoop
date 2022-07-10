@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-            WORK_DIR = '/var/lib/jenkins/workspace'
-        }
+        WORK_DIR = '/var/lib/jenkins/workspace'
+    }
 
     stages {
         stage('copy distr') {
