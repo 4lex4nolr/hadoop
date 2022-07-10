@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('copy distr') {
             steps {
-                sh 'tar ${WORK_DIR}/hadoop-3.3.3.tar.gz -C ${WORK_DIR}/${JOB_NAME}/'
+                sh 'tar -xvf ${WORK_DIR}/hadoop-3.3.3.tar.gz -C ${WORK_DIR}/${JOB_NAME}/'
                 sh 'cp ${WORK_DIR}/${JOB_NAME}/env/* ${WORK_DIR}/${JOB_NAME}/hadoop-3.3.3/etc/hadoop/'
             }
         }
